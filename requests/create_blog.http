@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Thrid Blog",
+  "author": "Qianlv",
+  "url": "http://127.0.0.1:3001/first_blog",
+  "likes": 10
+}
+

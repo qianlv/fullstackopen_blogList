@@ -1,0 +1,23 @@
+{
+  "name": "fullstackopen_bloglist",
+  "version": "1.0.0",
+  "description": "Blog List",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Qianlv",
+  "license": "MIT",
+  "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^2.10.0",
+    "eslint": "^9.13.0",
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.0"
+  }
+}
