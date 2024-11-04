@@ -1,3 +1,7 @@
+const Blog = require('../models/blog')
+const User = require('../models/user')
+const jwt = require('jsonwebtoken')
+
 const blogs = [
   {
     title: 'React patterns',
@@ -85,6 +89,39 @@ const listWithOneBlog = [
   }
 ]
 
+const blogsInDb = async () => {
+  const blogs = await Blog.find({})
+  return blogs.map(blog => blog.toJSON())
+}
+
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users.map(user => user.toJSON())
+}
+
+const userRootId = async () => {
+  const root = await User.findOne({ username: 'root' })
+  return root._id
+}
+
+const userToken = async (username = 'root') => {
+  const root = await User.findOne({ username: username })
+  const userToken = {
+    username: root.username,
+    id: root._id
+  }
+
+  const token = jwt.sign(userToken, process.env.SECRET)
+  console.log(token)
+  return `Bearer ${token}`
+}
+
 module.exports = {
-  blogs, listWithOneBlog, manyFavoriteBlogs
+  blogs,
+  listWithOneBlog,
+  manyFavoriteBlogs,
+  blogsInDb,
+  usersInDb,
+  userRootId,
+  userToken
 }
