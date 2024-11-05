@@ -4,6 +4,14 @@ const jwt = require('jsonwebtoken')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
+// blogsRouter.get('/', middleware.userExtractor, async (request, response) => {
+//   const user = request.user
+//   const blogs = await Blog
+//     .find({ user: user._id })
+//     .populate('user', { username: 1, name: 1 })
+//
+//   response.json(blogs)
+// })
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog
     .find({})
