@@ -48,14 +48,11 @@ blogsRouter.delete('/:id', middleware.userExtractor, async (request, response) =
   response.status(204).end()
 })
 
-blogsRouter.put('/:id', middleware.userExtractor, async (request, response) => {
+blogsRouter.put('/:id', async (request, response) => {
   const id = request.params.id
-  const user = request.user
-  const toUpdateBlog = await Blog.findById(id)
-  if (toUpdateBlog.user.toString() !== user._id.toString()) {
-    return response.status(403).json({ error: 'Forbidden' })
-  }
-  const updatedBlog = await Blog.findByIdAndUpdate(id, request.body, { new: true })
+  const updatedBlog = await Blog
+    .findByIdAndUpdate(id, request.body, { new: true })
+    .populate('user', { username: 1, name: 1 })
   response.json(updatedBlog)
 })
 
