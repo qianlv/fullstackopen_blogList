@@ -14,7 +14,7 @@ const Blog = ({ blog, likeVote, user, removeBlog }) => {
 
   return (
     <div style={blogStyle}>
-      {blog.title} | {blog.author}
+      {blog.title} {blog.author}
       {
         visible ?
           <button onClick={() => setVisible(false)}>hide</button> :
