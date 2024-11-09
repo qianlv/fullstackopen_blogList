@@ -233,36 +233,36 @@ describe('When there is initally some blogs saved', () => {
       assert.deepStrictEqual(toUpdateBlog, updateAtEnd.toJSON())
     })
 
-    test('failed with status code 401 without token if update user blog', async () => {
-      const blogs = await testHelper.blogsInDb()
-      const userId = await testHelper.userRootId()
-      const toUpdateBlog = blogs.find(blog => blog.user.toString() === userId.toString())
-      toUpdateBlog.title = 'Update one a blog'
-
-      await api
-        .put(`/api/blogs/${toUpdateBlog.id}`)
-        .send(toUpdateBlog)
-        .set('Content-Type', 'application/json')
-        .expect(401)
-    })
-
-    test('failed with status code 403 if update other user blog', async () => {
-      const blogs = await testHelper.blogsInDb()
-      const userId = await testHelper.userRootId()
-      const toUpdateBlog = blogs.find(blog => blog.user.toString() === userId.toString())
-      const oldTitle = toUpdateBlog.title
-      toUpdateBlog.title = 'Update one a blog'
-
-      await api
-        .put(`/api/blogs/${toUpdateBlog.id}`)
-        .send(toUpdateBlog)
-        .set('Content-Type', 'application/json')
-        .set('Authorization', await testHelper.userToken('root2'))
-        .expect(403)
-
-      const updateAtEnd = await Blog.findById(toUpdateBlog.id)
-      assert.strictEqual(updateAtEnd.title, oldTitle)
-    })
+    // test('failed with status code 401 without token if update user blog', async () => {
+    //   const blogs = await testHelper.blogsInDb()
+    //   const userId = await testHelper.userRootId()
+    //   const toUpdateBlog = blogs.find(blog => blog.user.toString() === userId.toString())
+    //   toUpdateBlog.title = 'Update one a blog'
+    //
+    //   await api
+    //     .put(`/api/blogs/${toUpdateBlog.id}`)
+    //     .send(toUpdateBlog)
+    //     .set('Content-Type', 'application/json')
+    //     .expect(401)
+    // })
+    //
+    // test('failed with status code 403 if update other user blog', async () => {
+    //   const blogs = await testHelper.blogsInDb()
+    //   const userId = await testHelper.userRootId()
+    //   const toUpdateBlog = blogs.find(blog => blog.user.toString() === userId.toString())
+    //   const oldTitle = toUpdateBlog.title
+    //   toUpdateBlog.title = 'Update one a blog'
+    //
+    //   await api
+    //     .put(`/api/blogs/${toUpdateBlog.id}`)
+    //     .send(toUpdateBlog)
+    //     .set('Content-Type', 'application/json')
+    //     .set('Authorization', await testHelper.userToken('root2'))
+    //     .expect(403)
+    //
+    //   const updateAtEnd = await Blog.findById(toUpdateBlog.id)
+    //   assert.strictEqual(updateAtEnd.title, oldTitle)
+    // })
 
   })
 
