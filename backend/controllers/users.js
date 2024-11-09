@@ -13,7 +13,7 @@ usersRouter.get('/', async (request, response) => {
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body
 
-  if (password.length < 3) {
+  if (!password || password.length < 3) {
     response.status(400).json({
       error: '`password` is shorter than the minimum allowed length (3).'
     })
