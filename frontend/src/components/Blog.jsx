@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-const Blog = ({ blog, likeVote, user, removeBlog }) => {
+const Blog = ({ blog, likeVote, user, removeBlog}) => {
   const [visible, setVisible] = useState(false)
 
   const blogStyle = {
@@ -12,8 +12,11 @@ const Blog = ({ blog, likeVote, user, removeBlog }) => {
     marginBottom: 5
   }
 
+  console.log('blog: ', blog)
+  console.log('user: ', user)
+
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} data-testid="blog-testid">
       {blog.title} {blog.author}
       {
         visible ?
